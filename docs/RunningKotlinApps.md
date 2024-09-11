@@ -7,3 +7,7 @@
     - `./gradlew test` - uses Junit, will rebuild automatically if needed
     - `./gradlew run` will rebuild automatically if needed
 
+## Useful links
+- [Gradle CLI reference](https://docs.gradle.org/current/userguide/command_line_interface.html)
+- Rename gradle project: in settings.gradle file
+
