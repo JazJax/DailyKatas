@@ -8,16 +8,27 @@ import org.junit.jupiter.api.Assertions.assertNotNull
 import org.junit.jupiter.api.Assertions.assertEquals
 
 class AppShould {
+    val sut = App()
     @Test
     fun printAGrid() {
-        val sut = App()
+        // val sut = App()
         assertNotNull(sut.printGrid(), "app should have a greeting")
     }
     @Test
     fun initialiseCorrectly() {
         val expected: String = "blank_grid"
-        val sut = App()
         val actual: String = sut.printGrid()
         assertEquals(expected, actual)
+    }
+}
+
+class GridShould {
+    @Test
+    fun be25x25() {
+        val expected = 25
+        val sut = Grid(expected)
+        assertEquals(expected, sut.size)
+        assertEquals(sut.values.size, expected)
+        sut.values.forEach { assertEquals(expected, it.size)}
     }
 }

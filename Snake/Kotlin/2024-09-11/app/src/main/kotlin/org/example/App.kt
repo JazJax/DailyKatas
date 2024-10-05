@@ -20,6 +20,23 @@ class App {
     }
 }
 
+data class Grid(val size: Int) {
+    val emptySpace: Char = '⯀'
+    lateinit var values: Array<Array<Char>>
+
+    init {
+        val row: Array<Char> = Array(size){emptySpace}
+        values = Array(size){ row }
+    }
+}
+
+data class Snake(val coords: Array<Pair<Number,Number>>) {
+
+}
+
 fun main() {
-    println(App().greeting)
+    val testGrid = Grid(25)
+    testGrid.values.forEach() {
+        println(it.contentToString())
+    }
 }
