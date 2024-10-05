@@ -51,6 +51,27 @@ class GridShould {
             it.forEach { assertEquals('⯀', it) }
         }
     }
+    @Test
+    fun acceptASnakePosition() {
+        val sut = Grid(4)
+        val snake = Snake(arrayOf<Pair<Int,Int>>(Pair(1,1)))
+        sut.updateSnakePosition(snake)
+    }
+    @Test
+    fun printSnakeOnTheGrid() {
+        val sut = Grid(2)
+        val snake = Snake(arrayOf<Pair<Int,Int>>(Pair(1,1)))
+        val expectedInitial: String = """
+            >| ⯀ ⯀ |
+            >| ⯀ ⯀ |""".trimMargin(">")
+        val expectedResult: String = """
+            >| ⯀ ⯀ |
+            >| ⯀ X |""".trimMargin(">")
+        //Confirm blank beforehand:
+        assertEquals(expectedInitial, sut.printGrid())
+        sut.updateSnakePosition(snake)
+        assertEquals(expectedResult, sut.printGrid())
+    }
 }
 
 class SnakeShould {

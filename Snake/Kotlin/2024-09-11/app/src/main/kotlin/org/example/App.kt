@@ -5,10 +5,10 @@ package org.example
 
 import java.io.File
 
-class App {
+class App(gridSize: Int = 25) {
     lateinit var snake: Snake
     lateinit private var grid: Grid
-    private var gridSize: Int = 25
+    // private var gridSize: Int = 25
 
     init {
         grid = Grid(gridSize)
@@ -22,14 +22,7 @@ class App {
         }
     
     fun printGrid(): String {
-        val builder = StringBuilder()
-        grid.values.forEach() {
-            builder.appendLine(it.contentToString())
-        }
-        val output = builder.toString().trim()
-            .replace("[","| ").replace("]"," |").replace(",","")
-        print(output)
-        return output
+        return grid.printGrid()
     }
 }
 
@@ -40,6 +33,21 @@ data class Grid(val size: Int) {
     init {
         val row: Array<Char> = Array(size){emptySpace}
         values = Array(size){ row }
+    }
+
+    fun updateSnakePosition(snake: Snake):Grid {
+        return this
+    }
+
+    fun printGrid(): String {
+        val builder = StringBuilder()
+        this.values.forEach() {
+            builder.appendLine(it.contentToString())
+        }
+        val output = builder.toString().trim()
+            .replace("[","| ").replace("]"," |").replace(",","")
+        print(output)
+        return output
     }
 }
 
