@@ -6,6 +6,7 @@ package org.example
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.Assertions.assertNotNull
 import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.Assertions.assertArrayEquals
 import java.io.File
 import java.io.BufferedReader
 
@@ -19,11 +20,18 @@ class AppShould {
         assertNotNull(sut.printGrid(), "app should have a greeting")
     }
     @Test
-    fun initialiseCorrectly() {
+    fun initialiseGridCorrectly() {
         val bufferedReader: BufferedReader = File(resourcesPath+"25x25_blank.txt").bufferedReader()
         val expected: String = bufferedReader.readText()
         val actual: String = sut.printGrid()
         assertEquals(expected, actual)
+    }
+    @Test
+    fun initialiseSnakeCorrectly() {
+        val expectedLength: Int = 1
+        val expectedPlacement: Array<Pair<Int,Int>> = arrayOf<Pair<Int,Int>>(Pair(12,12))
+        assertEquals(expectedLength, sut.snake.length)
+        assertArrayEquals(expectedPlacement, sut.snake.snakeSquares)
     }
 }
 
@@ -53,3 +61,11 @@ class SnakeShould {
         assertNotNull(sut.length)
     }
 }
+
+// class InputParserShould {
+//     val sut = InputParser()
+//     @Test
+//     fun acceptDirections() {
+        
+//     }
+// }

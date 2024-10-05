@@ -6,11 +6,14 @@ package org.example
 import java.io.File
 
 class App {
+    lateinit var snake: Snake
     lateinit private var grid: Grid
     private var gridSize: Int = 25
 
     init {
         grid = Grid(gridSize)
+        var startingSquare: Int = gridSize/2
+        snake = Snake(arrayOf<Pair<Int,Int>>(Pair(startingSquare, startingSquare)))
     }
 
     val greeting: String
