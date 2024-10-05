@@ -44,3 +44,12 @@ class GridShould {
         }
     }
 }
+
+class SnakeShould {
+    @Test
+    fun haveLength() {
+        val coOrds: Array<Pair<Int,Int>> = arrayOf(Pair(1,1))
+        val sut = Snake(coOrds)
+        assertNotNull(sut.length)
+    }
+}

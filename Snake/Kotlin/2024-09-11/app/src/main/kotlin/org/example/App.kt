@@ -40,8 +40,10 @@ data class Grid(val size: Int) {
     }
 }
 
-data class Snake(val coords: Array<Pair<Number,Number>>) {
+data class Snake(val coOrds: Array<Pair<Int,Int>>) {
 
+    var snakeSquares: Array<Pair<Int,Int>> = coOrds
+    var length: Int = snakeSquares.size
 }
 
 fun main() {
