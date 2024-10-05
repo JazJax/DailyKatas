@@ -3,6 +3,8 @@
  */
 package org.example
 
+import java.io.File
+
 class App {
     lateinit private var grid: Grid
     private var gridSize: Int = 25
@@ -22,6 +24,8 @@ class App {
             builder.appendLine(it.contentToString())
         }
         val output = builder.toString().trim()
+            .replace("[","| ").replace("]"," |").replace(",","")
+        print(output)
         return output
     }
 }
@@ -41,8 +45,6 @@ data class Snake(val coords: Array<Pair<Number,Number>>) {
 }
 
 fun main() {
-    val testGrid = Grid(25)
-    testGrid.values.forEach() {
-        println(it.contentToString())
-    }
+    val app = App()
+    app.printGrid()
 }
