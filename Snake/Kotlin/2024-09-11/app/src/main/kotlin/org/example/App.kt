@@ -4,10 +4,11 @@
 package org.example
 
 class App {
-    lateinit private var grid: String
+    lateinit private var grid: Grid
+    private var gridSize: Int = 25
 
     init {
-        grid = "blank_grid"
+        grid = Grid(gridSize)
     }
 
     val greeting: String
@@ -16,7 +17,12 @@ class App {
         }
     
     fun printGrid(): String {
-        return grid
+        val builder = StringBuilder()
+        grid.values.forEach() {
+            builder.appendLine(it.contentToString())
+        }
+        val output = builder.toString().trim()
+        return output
     }
 }
 
