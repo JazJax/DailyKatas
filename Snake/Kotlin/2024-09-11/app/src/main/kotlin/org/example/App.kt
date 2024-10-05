@@ -31,11 +31,19 @@ data class Grid(val size: Int) {
     lateinit var values: Array<Array<Char>>
 
     init {
-        val row: Array<Char> = Array(size){emptySpace}
-        values = Array(size){ row }
+        // val row: Array<Char> = Array(size){emptySpace}
+        // values = Array(size){ row }
+        values = Array(size){ Array(size){emptySpace} }
     }
 
     fun updateSnakePosition(snake: Snake):Grid {
+        setCell(Pair(1,1), 'X')
+        return this
+    }
+
+    fun setCell(coOrds: Pair<Int,Int>, newValue: Char): Grid {
+        // values[coOrds.first][coOrds.second] = newValue
+        values[0][2] = newValue
         return this
     }
 
@@ -58,6 +66,9 @@ data class Snake(val coOrds: Array<Pair<Int,Int>>) {
 }
 
 fun main() {
+    val coOrd = Pair(1,2)
+        println(coOrd.first)
+        println(coOrd.second)
     val app = App()
     app.printGrid()
 }

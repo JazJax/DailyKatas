@@ -59,14 +59,19 @@ class GridShould {
     }
     @Test
     fun printSnakeOnTheGrid() {
-        val sut = Grid(2)
-        val snake = Snake(arrayOf<Pair<Int,Int>>(Pair(1,1)))
+        val sut = Grid(3)
+        val coOrd = Pair(0,2)
+        println(coOrd.first)
+        println(coOrd.second)
+        val snake = Snake(arrayOf<Pair<Int,Int>>(coOrd))
         val expectedInitial: String = """
-            >| ⯀ ⯀ |
-            >| ⯀ ⯀ |""".trimMargin(">")
+            >| ⯀ ⯀ ⯀ |
+            >| ⯀ ⯀ ⯀ |
+            >| ⯀ ⯀ ⯀ |""".trimMargin(">")
         val expectedResult: String = """
-            >| ⯀ ⯀ |
-            >| ⯀ X |""".trimMargin(">")
+            >| ⯀ ⯀ ⯀ |
+            >| ⯀ ⯀ X|
+            >| ⯀ ⯀ ⯀ |""".trimMargin(">")
         //Confirm blank beforehand:
         assertEquals(expectedInitial, sut.printGrid())
         sut.updateSnakePosition(snake)
