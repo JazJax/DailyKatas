@@ -93,7 +93,7 @@ class SnakeShould {
         val snake = Snake(coOrds)
         val expectedPosition: Array<Pair<Int,Int>> = arrayOf(Pair(0,1))
         snake.up()
-        assertArrayEquals(snake.snakeSquares, expectedPosition)
+        assertArrayEquals(expectedPosition, snake.snakeSquares)
     }
     @Test
     fun moveUpWhenLengthIsThree() {
@@ -101,7 +101,7 @@ class SnakeShould {
         val snake = Snake(coOrds)
         val expectedPosition: Array<Pair<Int,Int>> = arrayOf(Pair(0,1),Pair(1,1),Pair(1,2))
         snake.up()
-        assertArrayEquals(snake.snakeSquares, expectedPosition)
+        assertArrayEquals(expectedPosition, snake.snakeSquares)
         assertEquals(3, snake.length)
     }
     @Test
@@ -110,7 +110,7 @@ class SnakeShould {
         val snake = Snake(coOrds)
         val expectedPosition: Array<Pair<Int,Int>> = arrayOf(Pair(1,2),Pair(1,1),Pair(2,1))
         snake.right()
-        assertArrayEquals(snake.snakeSquares, expectedPosition)
+        assertArrayEquals(expectedPosition, snake.snakeSquares)
     }
     @Test
     fun notMoveBackwards() {
@@ -119,7 +119,7 @@ class SnakeShould {
     val snake = Snake(coOrds)
     val expectedPosition: Array<Pair<Int,Int>> = arrayOf(Pair(1,1),Pair(1,2),Pair(1,3))
     snake.right()
-    assertArrayEquals(snake.snakeSquares, expectedPosition)
+    assertArrayEquals(expectedPosition, snake.snakeSquares)
     assertEquals(3, snake.length)
     }
 }
