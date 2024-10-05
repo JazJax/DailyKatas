@@ -64,19 +64,28 @@ data class Snake(val coOrds: Array<Pair<Int,Int>>) {
     var snakeSquares: Array<Pair<Int,Int>> = coOrds
     var length: Int = snakeSquares.size
 
-    fun up(): Snake = moveSnake(Pair(snakeSquares[0].first-1,snakeSquares[0].second))
-    fun right(): Snake = moveSnake(Pair(snakeSquares[0].first,snakeSquares[0].second+1))
+    fun up(grow: Boolean = false): Snake = moveSnake(Pair(snakeSquares[0].first-1,snakeSquares[0].second), grow)
+    fun down(grow: Boolean = false): Snake = moveSnake(Pair(snakeSquares[0].first+1,snakeSquares[0].second), grow)
+    fun right(grow: Boolean = false): Snake = moveSnake(Pair(snakeSquares[0].first,snakeSquares[0].second+1), grow)
+    fun left(grow: Boolean = false): Snake = moveSnake(Pair(snakeSquares[0].first,snakeSquares[0].second-1), grow)
+
     
-    fun moveSnake(newHead: Pair<Int,Int>): Snake {
-        val backwards: Boolean = (length > 1) && (newHead == snakeSquares[1]) 
-        if (backwards) return this else
-        
-        for(n in length-1 downTo 1) {
-            snakeSquares[n] = snakeSquares[n-1]
+    fun moveSnake(newHead: Pair<Int,Int>, grow: Boolean): Snake {
+        val backwards: Boolean = (length > 1) && (newHead == snakeSquares[1])
+        val lastSquare: Pair<Int,Int> = snakeSquares[length-1]
+        if (backwards) {
+            return this
+        } else {
+
+            for(n in length-1 downTo 1) {
+                snakeSquares[n] = snakeSquares[n-1]
+            }
+            snakeSquares[0] = newHead
+
+            if (grow == true) { snakeSquares += lastSquare }
+    
+            return this
         }
-        snakeSquares[0] = newHead
-    
-        return this
     }
 }
 
