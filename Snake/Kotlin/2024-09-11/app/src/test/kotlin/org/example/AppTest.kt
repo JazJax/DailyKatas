@@ -5,11 +5,19 @@ package org.example
 
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.Assertions.assertNotNull
+import org.junit.jupiter.api.Assertions.assertEquals
 
-class AppTest {
+class AppShould {
     @Test
-    fun appHasAGreeting() {
-        val classUnderTest = App()
-        assertNotNull(classUnderTest.greeting, "app should have a greeting")
+    fun printAGrid() {
+        val sut = App()
+        assertNotNull(sut.printGrid(), "app should have a greeting")
+    }
+    @Test
+    fun initialiseCorrectly() {
+        val expected: String = "blank_grid"
+        val sut = App()
+        val actual: String = sut.printGrid()
+        assertEquals(expected, actual)
     }
 }

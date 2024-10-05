@@ -4,10 +4,20 @@
 package org.example
 
 class App {
+    lateinit private var grid: String
+
+    init {
+        grid = "blank_grid"
+    }
+
     val greeting: String
         get() {
             return "Hello World!"
         }
+    
+    fun printGrid(): String {
+        return grid
+    }
 }
 
 fun main() {
