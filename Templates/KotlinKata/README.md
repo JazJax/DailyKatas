@@ -7,6 +7,11 @@
     - `./gradlew test` - uses Junit, will rebuild automatically if needed
     - `./gradlew run` will rebuild automatically if needed
 
+## Tests and coverage
+Run tests with watch using `./gradlew -t test`: `-t` is the Gradle watch flag
+- Test output is found at [/app/buiild/reports/tests/test/index.html](app/build/reports/tests/test/index.html)
+- Jacoco coverage output is found at [/app/buiild/reports/jacoco/test/html/index.html](app/build/reports/jacoco/test/html/index.html)
+
 ## Useful links
 - [Gradle CLI reference](https://docs.gradle.org/current/userguide/command_line_interface.html)
 - Rename gradle project: in settings.gradle file
