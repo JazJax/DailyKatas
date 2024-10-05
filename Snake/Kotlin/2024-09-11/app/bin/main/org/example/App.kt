@@ -63,20 +63,6 @@ data class Snake(val coOrds: Array<Pair<Int,Int>>) {
 
     var snakeSquares: Array<Pair<Int,Int>> = coOrds
     var length: Int = snakeSquares.size
-
-    fun up(): Snake = moveSnake(Pair(snakeSquares[0].first-1,snakeSquares[0].second))
-    fun right(): Snake = moveSnake(Pair(snakeSquares[0].first,snakeSquares[0].second+1))
-    
-    fun moveSnake(newHead: Pair<Int,Int>): Snake {
-        if (newHead == snakeSquares[0]) return this
-        
-        for(n in length-1 downTo 1) {
-            snakeSquares[n] = snakeSquares[n-1]
-        }
-        snakeSquares[0] = newHead
-    
-        return this
-    }
 }
 
 fun main() {
