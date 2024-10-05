@@ -3,7 +3,9 @@ I need to do more katas... so I thought I'd set up a central repo for them all. 
 
 ## Contents
 - Running different languages/frameworks:
-  - [Kotlin](docs/RunningKotlinApps.md)
+  - [Kotlin](Templates/KotlinKata/README.md)
+  - [C#](Templates/CSharpKata/README.md)
+  - [Typescript](Templates/TypescriptKata/README.md)
 - [System dependencies](docs/SystemDependencies.md)
 - [Kata sources](#kata-sources)
 - [Repo structure](#repo-structure)

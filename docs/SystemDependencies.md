@@ -6,6 +6,8 @@
   - [Contents](#contents)
     - [`> java -version`  (run: 2024-09-11)](#-java--version--run-2024-09-11)
     - [`> gradle -version` (run: 2024-09-11)](#-gradle--version-run-2024-09-11)
+    - [`> dotnet -version`  (run: 2024-10-05)](#-dotnet--version--run-2024-10-05)
+  - [`8.0.203`](#80203)
 
 ---
 ### `> java -version`  (run: 2024-09-11)
@@ -43,4 +45,7 @@ Launcher JVM:  22.0.2 (Homebrew 22.0.2)
 Daemon JVM:    /opt/homebrew/Cellar/openjdk/22.0.2/libexec/openjdk.jdk/Contents/Home (no JDK specified, using current Java home)
 OS:            Mac OS X 14.5 aarch64
 ```
+---
+### `> dotnet -version`  (run: 2024-10-05)
+`8.0.203`
 ---
