@@ -5,11 +5,169 @@ package org.example
 
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.Assertions.assertNotNull
+import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.Assertions.assertArrayEquals
+import java.io.File
+import java.io.BufferedReader
 
-class AppTest {
+val root: String = File("").absolutePath
+val resourcesPath: String = root + "/src/test/resources/"
+
+class AppShould {
+    val sut = App()
     @Test
-    fun appHasAGreeting() {
-        val classUnderTest = App()
-        assertNotNull(classUnderTest.greeting, "app should have a greeting")
+    fun printAGrid() {
+        assertNotNull(sut.printGrid(), "app should have a greeting")
+    }
+    @Test
+    fun initialiseGridCorrectly() {
+        val bufferedReader: BufferedReader = File(resourcesPath+"25x25_blank.txt").bufferedReader()
+        val expected: String = bufferedReader.readText()
+        val actual: String = sut.printGrid()
+        assertEquals(expected, actual)
+    }
+    @Test
+    fun initialiseSnakeCorrectly() {
+        val expectedLength: Int = 1
+        val expectedPlacement: Array<Pair<Int,Int>> = arrayOf<Pair<Int,Int>>(Pair(12,12))
+        assertEquals(expectedLength, sut.snake.length)
+        assertArrayEquals(expectedPlacement, sut.snake.snakeSquares)
     }
 }
+
+class GridShould {
+    @Test
+    fun be25x25() {
+        val expected = 25
+        val sut = Grid(expected)
+        assertEquals(expected, sut.size)
+        assertEquals(sut.values.size, expected)
+        sut.values.forEach { assertEquals(expected, it.size)}
+    }
+    @Test
+    fun containOnlyBlankSquares() {
+        val sut = Grid(4)
+        sut.values.forEach {
+            it.forEach { assertEquals('⯀', it) }
+        }
+    }
+    @Test
+    fun acceptASnakePosition() {
+        val sut = Grid(4)
+        val snake = Snake(arrayOf<Pair<Int,Int>>(Pair(1,1)))
+        sut.updateSnakePosition(snake)
+    }
+    // @Test
+    // fun printSnakeOnTheGrid() {
+    //     val sut = Grid(3)
+    //     val coOrd = Pair(0,2)
+    //     println(coOrd.first)
+    //     println(coOrd.second)
+    //     val snake = Snake(arrayOf<Pair<Int,Int>>(coOrd))
+    //     val expectedInitial: String = """
+    //         >| ⯀ ⯀ ⯀ |
+    //         >| ⯀ ⯀ ⯀ |
+    //         >| ⯀ ⯀ ⯀ |""".trimMargin(">")
+    //     val expectedResult: String = """
+    //         >| ⯀ ⯀ ⯀ |
+    //         >| ⯀ ⯀ X|
+    //         >| ⯀ ⯀ ⯀ |""".trimMargin(">")
+    //     //Confirm blank beforehand:
+    //     assertEquals(expectedInitial, sut.printGrid())
+    //     sut.updateSnakePosition(snake)
+    //     assertEquals(expectedResult, sut.printGrid())
+    // }
+}
+
+class SnakeShould {
+    @Test
+    fun haveLength() {
+        val coOrds: Array<Pair<Int,Int>> = arrayOf(Pair(1,1))
+        val snake = Snake(coOrds)
+        assertNotNull(snake.length)
+        assertEquals(1, snake.length)
+    }
+
+    @Test
+    fun moveUpWhenLengthIsOne() {
+        val coOrds: Array<Pair<Int,Int>> = arrayOf(Pair(1,1))
+        val snake = Snake(coOrds)
+        val expectedPosition: Array<Pair<Int,Int>> = arrayOf(Pair(0,1))
+        snake.up()
+        assertArrayEquals(expectedPosition, snake.snakeSquares)
+    }
+
+    @Test
+    fun moveUpWhenLengthIsThree() {
+        val coOrds: Array<Pair<Int,Int>> = arrayOf(Pair(1,1),Pair(1,2),Pair(2,2))
+        val snake = Snake(coOrds)
+        val expectedPosition: Array<Pair<Int,Int>> = arrayOf(Pair(0,1),Pair(1,1),Pair(1,2))
+        snake.up()
+        assertArrayEquals(expectedPosition, snake.snakeSquares)
+        assertEquals(3, snake.length)
+    }
+
+    @Test
+    fun moveRightWhenLengthIsThree() {
+        val coOrds: Array<Pair<Int,Int>> = arrayOf(Pair(1,1),Pair(2,1),Pair(2,2))
+        val snake = Snake(coOrds)
+        val expectedPosition: Array<Pair<Int,Int>> = arrayOf(Pair(1,2),Pair(1,1),Pair(2,1))
+        snake.right()
+        assertArrayEquals(expectedPosition, snake.snakeSquares)
+    }
+
+    @Test
+    fun notMoveBackwards() {
+        // for now, I'm going to just 'not move' the snake in this situation
+        val coOrds: Array<Pair<Int,Int>> = arrayOf(Pair(1,1),Pair(1,2),Pair(1,3))
+        val snake = Snake(coOrds)
+        val expectedPosition: Array<Pair<Int,Int>> = arrayOf(Pair(1,1),Pair(1,2),Pair(1,3))
+        snake.right()
+        assertArrayEquals(expectedPosition, snake.snakeSquares)
+        assertEquals(3, snake.length)
+    }
+
+    @Test
+    fun moveLeft() {
+        val coOrds: Array<Pair<Int,Int>> = arrayOf(Pair(1,1),Pair(2,1),Pair(2,2))
+        val snake = Snake(coOrds)
+        val expectedPosition: Array<Pair<Int,Int>> = arrayOf(Pair(1,0),Pair(1,1),Pair(2,1))
+        snake.left()
+        assertArrayEquals(expectedPosition, snake.snakeSquares)
+    }
+
+    @Test
+    fun `move down`() {
+        val coOrds: Array<Pair<Int,Int>> = arrayOf(Pair(1,1),Pair(1,0),Pair(0,0))
+        val snake = Snake(coOrds)
+        val expectedPosition: Array<Pair<Int,Int>> = arrayOf(Pair(2,1),Pair(1,1),Pair(1,0))
+        snake.down()
+        assertArrayEquals(expectedPosition, snake.snakeSquares)
+    }
+
+    @Test
+    fun `grow when it eats food`() {
+        // easiest way: add a 'grow' parameter to move
+        // snake will never grow without moving
+        val coOrds: Array<Pair<Int,Int>> = arrayOf(Pair(1,1),Pair(1,0),Pair(0,0))
+        val snake = Snake(coOrds)
+        val expectedPosition: Array<Pair<Int,Int>> = arrayOf(Pair(2,1),Pair(1,1),Pair(1,0),Pair(0,0))
+        snake.down(true)
+        assertArrayEquals(expectedPosition, snake.snakeSquares)
+    }
+
+    @Test
+    fun `throw if it crosses`() {
+        // next to do...
+    }
+}
+
+// class InputParserShould {
+//     val sut = InputParser()
+//     @Test
+//     fun acceptDirections() {
+        
+//     }
+// }
+
+
