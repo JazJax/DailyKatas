@@ -1,5 +1,8 @@
 {
     "java.compile.nullAnalysis.mode": "automatic",
     "dotnet.defaultSolution": "CSharpConsoleApp.sln",
-    "java.configuration.updateBuildConfiguration": "interactive"
+    "java.configuration.updateBuildConfiguration": "interactive",
+    // Update the jest.rootPath variable to point to a project you wish to test 
+    // if you want testrunner sidebar integration in vsCode
+    "jest.rootPath": "Templates/TypescriptKata"
 }
